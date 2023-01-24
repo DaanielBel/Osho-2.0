@@ -19,4 +19,4 @@ intents.message_content = True
 client = MyClient(intents=intents)
 client.run(os.getenv('TOKEN'))"""
 
-print(os.gatenv('TOKEN'))
+print(os.environ['TOKEN'])
