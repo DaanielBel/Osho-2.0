@@ -1,6 +1,4 @@
-import discord
-import os
-from dotenv import load_dotenv
+"""import discord
 
 load_dotenv()
 
@@ -16,4 +14,6 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 client = MyClient(intents=intents)
-client.run(os.getenv('TOKEN'))
+client.run(os.getenv('TOKEN'))"""
+
+print(os.gatenv('TOKEN'))
