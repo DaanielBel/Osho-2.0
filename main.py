@@ -18,6 +18,7 @@ class MyClient(discord.Client):
     async def on_voice_state_update(self, member, before, after):
         if after != None and not member.bot:
             print(member.name + " joined " + after.channel.name)
+            print(after)
             await after.channel.connect()
         else:
             if not member.bot:
