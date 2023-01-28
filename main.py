@@ -19,13 +19,13 @@ class MyClient(discord.Client):
         if str(message.author.id) == "822239449849135116":
             await message.channel.send('Shut up nigga!')
 
-    async def disconnect(bot, member):  
+    async def disconnect(voice, member):  
         print("start before sleep")
         time.sleep(5)
         print("start after sleep")
         await member.edit(voice_channel=None)
-        await bot.voice.disconnect()
-        bot.voice = None        
+        await voice.disconnect()
+        voice = None        
         print("finished in")
 
     @commands.Cog.listener()
@@ -41,7 +41,7 @@ class MyClient(discord.Client):
                     self.voice = await after.channel.connect()
                     self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))
         
-                t1 = threading.Thread(target= self.disconnect(self, member), args=(10,))
+                t1 = threading.Thread(target= self.disconnect(self.voice, member), args=(10,))
                 print("before start")
                 t1.start()
                 t1.join()
