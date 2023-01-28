@@ -17,9 +17,8 @@ class MyClient(discord.Client):
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         if after.channel.id == 826173512120139869 and not member.bot:
-            self = await client.join_voice_channel(after.channel.id)
+            client = await client.join_voice_channel(after.channel.id)
 
-            #do whatever you want here
 intents = discord.Intents.default()
 intents.message_content = True
 
