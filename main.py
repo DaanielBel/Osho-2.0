@@ -1,5 +1,6 @@
 import discord
 import time
+import asyncio
 import logging
 import threading
 import os
@@ -39,12 +40,11 @@ class MyClient(discord.Client):
 
 
                 self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))
-                t1 = threading.Timer(5.0, self.discon, args=(self, member, ))
-                t1.start()
+                asyncio.sleep(5)
 
-                #await member.edit(voice_channel=None)
-                #await self.voice.disconnect()
-                #self.voice = None
+                await member.edit(voice_channel=None)
+                await self.voice.disconnect()
+                self.voice = None
             else:
                 print("Disconnected")
                 await self.voice.disconnect()
