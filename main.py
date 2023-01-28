@@ -19,8 +19,10 @@ class MyClient(discord.Client):
 
         if after is not None and not member.bot:
             await after.channel.connect()
+            print("Connected")
         
         if after is None:
+            print("DisConnected")
             guild = getattr(after.channel, 'guild', None)
             if guild is None:
                 return
