@@ -33,7 +33,8 @@ class MyClient(discord.Client):
                     self.voice = await after.channel.connect()
 
 
-                await self.wait_for(self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3")), timeout=60.0)
+                await self.wait_for(self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3")), timeout=5)
+                print("after sound")
                 await member.edit(voice_channel=None)
                 await self.voice.disconnect()
                 self.voice = None
