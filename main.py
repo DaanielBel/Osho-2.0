@@ -16,12 +16,9 @@ class MyClient(discord.Client):
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
-        voice = self.voice
-
         if after.channel is not None:
             print("Connected")
-            await voice.disconnect()
-            await after.channel.connect()
+            voice = await after.channel.connect()
         else:
             print("Disconnected")
             await voice.disconnect()
