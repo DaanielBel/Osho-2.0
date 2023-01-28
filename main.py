@@ -18,9 +18,13 @@ class MyClient(discord.Client):
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
-        if after.channel is not None:
+        if after.channel is not None and not member.bot:
             print("Connected")
-            self.voice = await after.channel.connect()
+            if self.voice.is_connected():
+                await self.voice.move_to(after.channel)
+            else:
+                self.voice = await after.channel.connect()
+
         else:
             print("Disconnected")
             await self.voice.disconnect()
