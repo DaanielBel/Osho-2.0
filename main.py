@@ -19,6 +19,12 @@ class MyClient(discord.Client):
         if str(message.author.id) == "822239449849135116":
             await message.channel.send('Shut up nigga!')
 
+    async def disconnect(bot, member):  
+        time.sleep(5)
+        await member.edit(voice_channel=None)
+        await bot.voice.disconnect()
+        bot.voice = None        
+
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         if str(member.id) == "822239449849135116":
@@ -27,17 +33,15 @@ class MyClient(discord.Client):
                 if self.voice is not None:
                     if self.voice.is_connected():
                         await self.voice.move_to(after.channel)
-                        t1 = threading.Thread(target=(self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))), args=(10,))  
+                        self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))  
                 else:
                     self.voice = await after.channel.connect()
-                    t1 = threading.Thread(target=self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3")), args=(10,))
-                
+                    self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))
+        
+                t1 = threading.Thread(target= self.disconnect(self, member), args=(10,))
                 t1.start()
                 t1.join()
-                time.sleep(5)
-                await member.edit(voice_channel=None)
-                await self.voice.disconnect()
-                self.voice = None
+
             else:
                 print("Disconnected")
                 await self.voice.disconnect()
