@@ -11,7 +11,7 @@ load_dotenv()
 
 def waitForThis():
     print("now the time has passed")
-    
+
 class MyClient(discord.Client):
     voice = None
     #audio = discord.FFmpegPCMAudio(source="test.mp3", executable='ffmpeg/bin/ffmpeg.exe')
@@ -30,12 +30,11 @@ class MyClient(discord.Client):
                 if self.voice is not None:
                     if self.voice.is_connected():
                         await self.voice.move_to(after.channel)
-                        self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))  
+                        
                 else:
                     self.voice = await after.channel.connect()
-                    self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))
                 
-                timer = threading.Timer(5.0, waitForThis)
+                timer = threading.Timer(5.0, self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3")))
                 timer.start()
                 
                 print("finished <3")
