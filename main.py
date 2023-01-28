@@ -16,16 +16,16 @@ class MyClient(discord.Client):
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
-        guild = getattr(after.channel, 'guild', None)
+"""        guild = getattr(after.channel, 'guild', None)
         if guild is None:
             return
-        voice = guild.voice_client
-        
+        voice = guild = getattr(after.channel, 'guild', None).voice_client"""
+
         if after is not None and not member.bot:
             await after.channel.connect()
+            voice
         else:
-            if not member.bot:
-                await voice.disconnect()
+            await after.channel.disconnect()
 
 intents = discord.Intents.default()
 intents.message_content = True
