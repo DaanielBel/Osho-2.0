@@ -8,7 +8,7 @@ load_dotenv()
 
 class MyClient(discord.Client):
     voice = None
-
+    audio = discord.FFmpegPCMAudio(source="C:\Users\\danie\\Desktop\\Osho 2.0\\Osho-2.0\\test.m4a", executable='ffmpeg/bin/ffmpeg.exe')
     async def on_ready(self):
         print(f'Logged on as {self.user}!')
 
@@ -30,6 +30,8 @@ class MyClient(discord.Client):
                 print("Disconnected")
                 await self.voice.disconnect()
                 self.voice = None
+            
+            self.voice.play(audio)
 
 intents = discord.Intents.default()
 intents.message_content = True
