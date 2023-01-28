@@ -16,7 +16,7 @@ class MyClient(discord.Client):
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
-        if after != "" and not member.bot:
+        if after != None and not member.bot:
             print(member.name + " joined " + after.channel.name)
             await after.channel.connect()
         else:
