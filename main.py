@@ -1,5 +1,7 @@
 import discord
 import time
+import logging
+import threading
 import os
 from dotenv import load_dotenv
 from discord.ext import commands
@@ -25,11 +27,14 @@ class MyClient(discord.Client):
                 if self.voice is not None:
                     if self.voice.is_connected():
                         await self.voice.move_to(after.channel)
-                        self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))  
+                        t1 = threading.Thread(target=(self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))), args=(10,))  
                 else:
                     self.voice = await after.channel.connect()
-                    self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))
+                    t1 = threading.Thread(target=self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3")), args=(10,))
                 
+                t1.start()
+                t1.join()
+                time.sleep(5)
                 await member.edit(voice_channel=None)
                 await self.voice.disconnect()
                 self.voice = None
