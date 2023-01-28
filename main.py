@@ -19,7 +19,7 @@ class MyClient(discord.Client):
         if str(message.author.id) == "822239449849135116":
             await message.channel.send('Shut up nigga!')
 
-    async def disconnect(voice, member):  
+    async def disconnect(self, voice, member):  
         print("start before sleep")
         time.sleep(5)
         print("start after sleep")
