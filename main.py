@@ -25,8 +25,14 @@ class MyClient(discord.Client):
                 if self.voice is not None:
                     if self.voice.is_connected():
                         await self.voice.move_to(after.channel)
+                        self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))
+                        time.sleep(3)
+                        await member.edit(voice_channel=None)
+                        await self.voice.disconnect()
+                        self.voice = None
                 else:
                     self.voice = await after.channel.connect()
+                    self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))
                     time.sleep(3)
                     await member.edit(voice_channel=None)
                     await self.voice.disconnect()
@@ -37,7 +43,6 @@ class MyClient(discord.Client):
                 await self.voice.disconnect()
                 self.voice = None
             
-            self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))
 
 intents = discord.Intents.default()
 intents.message_content = True
