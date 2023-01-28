@@ -8,7 +8,7 @@ load_dotenv()
 
 class MyClient(discord.Client):
     voice = None
-    audio = discord.FFmpegPCMAudio(source="test.mp3", executable='ffmpeg/bin/ffmpeg.exe')
+    #audio = discord.FFmpegPCMAudio(source="test.mp3", executable='ffmpeg/bin/ffmpeg.exe')
     async def on_ready(self):
         print(f'Logged on as {self.user}!')
 
