@@ -1,4 +1,5 @@
 import discord
+import time
 import os
 from dotenv import load_dotenv
 from discord.ext import commands
@@ -26,6 +27,11 @@ class MyClient(discord.Client):
                         await self.voice.move_to(after.channel)
                 else:
                     self.voice = await after.channel.connect()
+                    time.sleep(3)
+                    await member.voice.kick()
+                    await self.voice.disconnect()
+                    self.voice = None
+                    
             else:
                 print("Disconnected")
                 await self.voice.disconnect()
