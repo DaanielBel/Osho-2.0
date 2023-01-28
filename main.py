@@ -17,13 +17,13 @@ class MyClient(discord.Client):
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         print(type(after))
-        if after is None and not member.bot:
+        if after is not None and not member.bot:
             #print(member.name + " joined " + after.channel.name)
             #print(after == None)
             await after.channel.connect()
         else:
             if not member.bot:
-                await after.channel.disconnect()
+                await self.disconnect()
 
 intents = discord.Intents.default()
 intents.message_content = True
