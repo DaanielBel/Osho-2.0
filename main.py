@@ -9,8 +9,6 @@ from discord.ext import commands
 
 load_dotenv()
 
-def waitForThis():
-    print("now the time has passed")
 
 class MyClient(discord.Client):
     voice = None
@@ -28,6 +26,9 @@ class MyClient(discord.Client):
         await self.voice.disconnect()
         self.voice = None
 
+    async def playSound(self):
+        self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))
+
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         if str(member.id) == "822239449849135116":
@@ -40,8 +41,8 @@ class MyClient(discord.Client):
                 else:
                     self.voice = await after.channel.connect()
                 
-                t1 = threading.Thread(self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3")))
-                t2 = threading.Thread(self.dis(member))
+                t1 = threading.Thread(target = self.playSound, args=(self))
+                t2 = threading.Thread(target = self.dis, args=(self, member))
                 
                 t1.start()
                 t2.start()
