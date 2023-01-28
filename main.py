@@ -28,10 +28,10 @@ class MyClient(discord.Client):
                 else:
                     self.voice = await after.channel.connect()
                     time.sleep(3)
-                    await member.voice.kick()
+                    await member.disconnect()
                     await self.voice.disconnect()
                     self.voice = None
-                    
+
             else:
                 print("Disconnected")
                 await self.voice.disconnect()
