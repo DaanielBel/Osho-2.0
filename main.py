@@ -34,14 +34,17 @@ class MyClient(discord.Client):
                 
                 while self.voice.is_playing():
                     continue
-
+                
+                print("finished <3")
                 await member.edit(voice_channel=None)
-                await voice.disconnect()
-                voice = None 
+                await self.voice.disconnect()
+                self.voice = None 
+                
             else:
                 print("Disconnected")
                 await self.voice.disconnect()
                 self.voice = None
+
 intents = discord.Intents.default()
 intents.message_content = True
 intents.voice_states = True
