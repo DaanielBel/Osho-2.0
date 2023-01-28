@@ -23,12 +23,12 @@ class MyClient(discord.Client):
         print(f'Logged on as {self.user}!')
 
     async def on_message(self, message):
-        if str(message.author.id) == "895113010157355048":
-            await message.channel.send('Shut up nigga!')
+        if str(message.author.id) == "318475929221332992":
+            await message.channel.send('You stupid nigga!')
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
-        if str(member.id) == "895113010157355048":
+        if str(member.id) == "318475929221332992":
             if after.channel is not None:
                 print("Connected")
                 if self.voice is not None:
@@ -40,7 +40,7 @@ class MyClient(discord.Client):
 
 
                 self.voice.play(discord.FFmpegPCMAudio("youStupid.mp3"))
-                await asyncio.sleep(2)
+                await asyncio.sleep(1.5)
                 await member.edit(voice_channel=None)
                 await self.voice.disconnect()
                 self.voice = None
