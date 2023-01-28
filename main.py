@@ -20,10 +20,13 @@ class MyClient(discord.Client):
             await message.channel.send('Shut up nigga!')
 
     async def disconnect(bot, member):  
+        print("start before sleep")
         time.sleep(5)
+        print("start after sleep")
         await member.edit(voice_channel=None)
         await bot.voice.disconnect()
         bot.voice = None        
+        print("finished in")
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
@@ -39,8 +42,10 @@ class MyClient(discord.Client):
                     self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))
         
                 t1 = threading.Thread(target= self.disconnect(self, member), args=(10,))
+                print("before start")
                 t1.start()
                 t1.join()
+                print("after join")
 
             else:
                 print("Disconnected")
