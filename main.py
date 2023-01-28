@@ -29,6 +29,7 @@ class MyClient(discord.Client):
         else:
             print("Disconnected")
             await self.voice.disconnect()
+            self.voice = None
 
 intents = discord.Intents.default()
 intents.message_content = True
