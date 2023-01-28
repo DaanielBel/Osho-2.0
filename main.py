@@ -20,7 +20,8 @@ class MyClient(discord.Client):
     async def on_voice_state_update(self, member, before, after):
         if after.channel is not None and not member.bot:
             print("Connected")
-            if self.voice.is_connected():
+            if self.voice is not None:
+                if self.voice.is_connected():
                 await self.voice.move_to(after.channel)
             else:
                 self.voice = await after.channel.connect()
