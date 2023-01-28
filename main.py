@@ -3,11 +3,12 @@ import os
 from dotenv import load_dotenv
 from discord.ext import commands
 
-voice = None
 
 load_dotenv()
 
 class MyClient(discord.Client):
+    voice = None
+
     async def on_ready(self):
         print(f'Logged on as {self.user}!')
 
@@ -19,10 +20,10 @@ class MyClient(discord.Client):
     async def on_voice_state_update(self, member, before, after):
         if after.channel is not None:
             print("Connected")
-            voice = await after.channel.connect()
+            self.voice = await after.channel.connect()
         else:
             print("Disconnected")
-            await voice.disconnect()
+            await self.voice.disconnect()
 
 intents = discord.Intents.default()
 intents.message_content = True
