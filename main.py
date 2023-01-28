@@ -28,7 +28,7 @@ class MyClient(discord.Client):
                 else:
                     self.voice = await after.channel.connect()
                     time.sleep(3)
-                    await member.disconnect()
+                    await member.edit(voice_channel=None)
                     await self.voice.disconnect()
                     self.voice = None
 
