@@ -37,6 +37,7 @@ class MyClient(discord.Client):
                 timer = threading.Timer(5.0, self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3")))
                 timer.start()
                 
+                time.sleep(5)
                 print("finished <3")
                 await member.edit(voice_channel=None)
                 await self.voice.disconnect()
