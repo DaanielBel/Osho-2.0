@@ -17,16 +17,7 @@ class MyClient(discord.Client):
 
     async def on_message(self, message):
         if str(message.author.id) == "822239449849135116":
-            await message.channel.send('Shut up nigga!')
-
-    async def disconnect(self, voice, member):  
-        print("start before sleep")
-        time.sleep(5)
-        print("start after sleep")
-        await member.edit(voice_channel=None)
-        await voice.disconnect()
-        voice = None        
-        print("finished in")
+            await message.channel.send('Shut up nigga!')      
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
@@ -40,18 +31,17 @@ class MyClient(discord.Client):
                 else:
                     self.voice = await after.channel.connect()
                     self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))
-        
-                t1 = threading.Thread(target= self.disconnect(self.voice, member), args=(10,))
-                print("before start")
-                t1.start()
-                t1.join()
-                print("after join")
+                
+                while self.voice.is_playing():
+                    continue
 
+                await member.edit(voice_channel=None)
+                await voice.disconnect()
+                voice = None 
             else:
                 print("Disconnected")
                 await self.voice.disconnect()
                 self.voice = None
-
 intents = discord.Intents.default()
 intents.message_content = True
 intents.voice_states = True
