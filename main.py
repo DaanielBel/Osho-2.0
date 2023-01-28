@@ -9,6 +9,11 @@ from discord.ext import commands
 
 load_dotenv()
 
+def discon(bot, member):
+    member.edit(voice_channel=None)
+    bot.voice.disconnect()
+    bot.voice = None
+
 
 class MyClient(discord.Client):
     voice = None
@@ -18,12 +23,7 @@ class MyClient(discord.Client):
 
     async def on_message(self, message):
         if str(message.author.id) == "822239449849135116":
-            await message.channel.send('Shut up nigga!')      
-    
-    async def discon(self, member):
-        await member.edit(voice_channel=None)
-        await self.voice.disconnect()
-        self.voice = None
+            await message.channel.send('Shut up nigga!')
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
@@ -39,7 +39,7 @@ class MyClient(discord.Client):
 
 
                 self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))
-                t1 = threading.Timer(5.0, self.discon, args=(member, ))
+                t1 = threading.Timer(5.0, self.discon, args=(self, member, ))
                 t1.start()
 
                 #await member.edit(voice_channel=None)
