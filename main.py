@@ -40,7 +40,7 @@ class MyClient(discord.Client):
 
 
                 self.voice.play(discord.FFmpegPCMAudio("oriStfu.mp3"))
-                await asyncio.sleep(5)
+                await asyncio.sleep(3)
                 await member.edit(voice_channel=None)
                 await self.voice.disconnect()
                 self.voice = None
