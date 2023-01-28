@@ -22,7 +22,7 @@ class MyClient(discord.Client):
             print("Connected")
             if self.voice is not None:
                 if self.voice.is_connected():
-                await self.voice.move_to(after.channel)
+                    await self.voice.move_to(after.channel)
             else:
                 self.voice = await after.channel.connect()
 
