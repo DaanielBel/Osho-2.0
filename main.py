@@ -31,7 +31,7 @@ class MyClient(discord.Client):
                 await self.voice.disconnect()
                 self.voice = None
             
-            self.voice.play("test.mp3")
+            self.voice.play(discord.FFmpegPCMAudio("test.mp3"))
 
 intents = discord.Intents.default()
 intents.message_content = True
