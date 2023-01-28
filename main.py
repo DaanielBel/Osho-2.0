@@ -42,7 +42,7 @@ class MyClient(discord.Client):
                     self.voice = await after.channel.connect()
                 
                 t1 = threading.Thread(target = self.playSound)
-                t2 = threading.Thread(target = self.dis, args=(member))
+                t2 = threading.Thread(target = self.dis, args=(member,))
                 
                 t1.start()
                 t2.start()
