@@ -10,6 +10,7 @@ from discord.ext import commands
 
 load_dotenv()
 
+
 def discon(bot, member):
     member.edit(voice_channel=None)
     bot.voice.disconnect()
@@ -52,6 +53,16 @@ class MyClient(discord.Client):
 intents = discord.Intents.default()
 intents.message_content = True
 intents.voice_states = True
+client = MyClient(intents=intents, command_prefix = "$$")
 
-client = MyClient(intents=intents, command_prefix = "!")
-client.run(os.environ['TOKEN'])
+
+@client.commands()
+async def target(ctx, tar : discord.member):
+    await print(tar)
+
+
+
+async def main():
+    client.run(os.environ['TOKEN'])
+
+asyncio.run(main())
