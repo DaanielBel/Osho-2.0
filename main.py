@@ -23,12 +23,12 @@ class MyClient(discord.Client):
         print(f'Logged on as {self.user}!')
 
     async def on_message(self, message):
-        if str(message.author.id) == "762627201085734922":
+        if str(message.author.id) == "786672141579059250":
             await message.channel.send('You stupid nigga!')
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
-        if str(member.id) == "762627201085734922":
+        if str(member.id) == "786672141579059250":
             if after.channel is not None:
                 print("Connected")
                 if self.voice is not None:
