@@ -28,6 +28,7 @@ class MyClient(discord.Client):
 
     @commands
     async def yes(self, tar: discord.member):
+        print("yes")
         self.target = str(tar.id)
 
 
