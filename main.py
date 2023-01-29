@@ -53,7 +53,7 @@ class MyClient(discord.Client):
 intents = discord.Intents.default()
 intents.message_content = True
 intents.voice_states = True
-client = MyClient(intents=intents, command_prefix = "$$")
+client = commands.MyClient(intents=intents, command_prefix = "$$")
 
 
 @client.commands()
