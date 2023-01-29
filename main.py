@@ -6,7 +6,8 @@ import threading
 import os
 from dotenv import load_dotenv
 from discord.ext import commands
-
+from discord import app_commands
+from discord.ext import commands
 
 load_dotenv()
 
@@ -18,17 +19,19 @@ def discon(bot, member):
 
 class MyClient(discord.Client):
     voice = None
-    #audio = discord.FFmpegPCMAudio(source="test.mp3", executable='ffmpeg/bin/ffmpeg.exe')
+    target = "318475929221332992"
+    
     async def on_ready(self):
+        await tree.sync(guild=discord.Object(id=885615716915642498))
         print(f'Logged on as {self.user}!')
 
     async def on_message(self, message):
-        if str(message.author.id) == "318475929221332992":
+        if str(message.author.id) == self.target:
             await message.channel.send('You stupid nigga!')
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
-        if str(member.id) == "318475929221332992":
+        if str(member.id) == self.target:
             if after.channel is not None:
                 print("Connected")
                 if self.voice is not None:
@@ -53,5 +56,6 @@ intents = discord.Intents.default()
 intents.message_content = True
 intents.voice_states = True
 
-client = MyClient(intents=intents, command_prefix = "!")
+client = MyClient(intents=intents, command_prefix = "^^")
+tree = app_commands.CommandTree(client)
 client.run(os.environ['TOKEN'])
