@@ -55,9 +55,4 @@ intents.message_content = True
 intents.voice_states = True
 client = MyClient(intents=intents, command_prefix = "$$")
 
-
-
-async def main():
-    client.run(os.environ['TOKEN'])
-
-asyncio.run(main())
+client.run(os.environ['TOKEN'])
