@@ -53,12 +53,7 @@ class MyClient(discord.Client):
 intents = discord.Intents.default()
 intents.message_content = True
 intents.voice_states = True
-client = commands.MyClient(intents=intents, command_prefix = "$$")
-
-
-@client.commands()
-async def target(ctx, tar : discord.member):
-    await print(tar)
+client = MyClient(intents=intents, command_prefix = "$$")
 
 
 
